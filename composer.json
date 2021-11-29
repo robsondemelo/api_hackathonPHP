@@ -1,0 +1,17 @@
+{
+    "name": "alfa/php-mysql",
+    "require": {
+        "symfony/var-dumper": "^5.3",
+        "slim/slim": "^4.8",
+        "slim/psr7": "^1.4",
+        "robmorgan/phinx": "^0.12.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alfa\\":"src/"
+        }
+    },
+    "scripts":{
+        "migrate":"phinx migrate"
+    }
+}

@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  api:
+    
+    restart: on-failure
+    build:
+      context: .
+    volumes:
+      - .:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - aplicacao
+    depends_on:
+      - mysql
+  mysql:
+    container_name: banco
+    image: mysql:5.7.30
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASS}
+      - MYSQL_DATABASE=${DATABASE_NAME}
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - aplicacao
+  nginx:
+    container_name: proxy
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    networks:
+      - aplicacao
+    depends_on:
+      - api
+
+networks:
+  aplicacao:
+
+volumes:
+  mysql:
