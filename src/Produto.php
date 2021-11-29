@@ -15,13 +15,12 @@ class Produto extends Entity
     #[Column]
     public string $foto;
     #[Column]
-    public text $descricao;
+    public string $descricao;
     #[Column]
-    public double $valor;
+    public string $valor;
     #[Column]
     public int $categoria_id;
     #[Column]
     public int $empresa_id;
-
-    public string $codigoUnico = "";
+    
 }
